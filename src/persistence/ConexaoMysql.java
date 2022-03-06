@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 public class ConexaoMysql {
     
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/db_upload_images?useTimezone=true&serverTimezone=UTC";
-    private static final String USER = "";
-    private static final String PASSWORD = "";
+    private static final String USER = "root";
+    private static final String PASSWORD = "9320";
     private static Connection conexao = null;
 
     public static Connection getConexao() throws SQLException, ClassNotFoundException {

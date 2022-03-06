@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
  */
 public class Arquivo {
     
-    private BufferedImage imagem;
+    private BufferedImage imagemBF;
     private long idArquivo;
-    private byte[] arquivo;
+    private byte[] arquivoByte;
 
     public long getIdArquivo() {
         return idArquivo;
@@ -25,20 +25,20 @@ public class Arquivo {
         this.idArquivo = idArquivo;
     }
 
-    public byte[] getArquivo() {
-        return arquivo;
+    public byte[] getArquivoByte() {
+        return arquivoByte;
     }
 
-    public void setArquivo(byte[] arquivo) {
-        this.arquivo = arquivo;
+    public void setArquivoByte(byte[] arquivoByte) {
+        this.arquivoByte = arquivoByte;
     }
 
-    public BufferedImage getImagem() {
-        return imagem;
+    public BufferedImage getImagemBF() {
+        return imagemBF;
     }
 
-    public void setImagem(BufferedImage imagem) {
-        this.imagem = imagem;
+    public void setImagemBF(BufferedImage imagemBF) {
+        this.imagemBF = imagemBF;
     }
     
     

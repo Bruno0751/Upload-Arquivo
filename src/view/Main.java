@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ConexaoMysql c = null;
         c.getConexao();
-        new GUIMain().setVisible(true);
+        new GUIInsertFile().setVisible(true);
     }
     
 }
