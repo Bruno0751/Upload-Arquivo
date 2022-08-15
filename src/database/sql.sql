@@ -1,3 +1,7 @@
+CREATE DATABASE db_upload_images;
+
+USE db_upload_images;
+
 CREATE TABLE db_upload_images.arquivos(
 id_arquivo INT AUTO_INCREMENT NOT NULL,
 arquivo BLOB NULL,

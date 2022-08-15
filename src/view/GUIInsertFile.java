@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import dao.ArquivoDAO;
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import model.Arquivo;
 import utl.ManipularArquivo;
 import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -20,13 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class GUIInsertFile extends javax.swing.JFrame {
 
+    private String ipDaMaquina;
     Arquivo obj = new Arquivo();
     
     /**
      * Creates new form GUIMain
      */
-    public GUIInsertFile() {
+    public GUIInsertFile() throws UnknownHostException {
         initComponents();
+        this.ipDaMaquina = InetAddress.getLocalHost().getHostAddress();
     }
     
     long idArquivo;
@@ -41,6 +44,7 @@ public class GUIInsertFile extends javax.swing.JFrame {
         jButtonInserir = new javax.swing.JButton();
         jLabelIconArquivo = new javax.swing.JLabel();
         jButtonEnviar = new javax.swing.JButton();
+        jButtonPrj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bem Vindo");
@@ -59,6 +63,13 @@ public class GUIInsertFile extends javax.swing.JFrame {
             }
         });
 
+        jButtonPrj.setText("Projeto");
+        jButtonPrj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrjActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,20 +77,25 @@ public class GUIInsertFile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
+                        .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonInserir)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonInserir)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonPrj))
                             .addComponent(jButtonEnviar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabelIconArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addComponent(jLabelIconArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonInserir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonInserir)
+                    .addComponent(jButtonPrj))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelIconArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -138,9 +154,20 @@ public class GUIInsertFile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
+    private void jButtonPrjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrjActionPerformed
+        if (this.ipDaMaquina.contains("192.168.")) {
+            try {
+                Desktop.getDesktop().open(new File("D:\\PrjDesktopJava\\ok\\Upload Arquivo"));
+            } catch (IOException ex) {
+                Logger.getLogger(GUIInsertFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonPrjActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEnviar;
     private javax.swing.JButton jButtonInserir;
+    private javax.swing.JButton jButtonPrj;
     private javax.swing.JLabel jLabelIconArquivo;
     // End of variables declaration//GEN-END:variables
 }
