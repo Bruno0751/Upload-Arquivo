@@ -23,7 +23,7 @@ public class GUIInsertFile extends javax.swing.JFrame {
 
     private String ipDaMaquina;
     Arquivo obj = new Arquivo();
-    
+
     /**
      * Creates new form GUIMain
      */
@@ -31,12 +31,12 @@ public class GUIInsertFile extends javax.swing.JFrame {
         initComponents();
         this.ipDaMaquina = InetAddress.getLocalHost().getHostAddress();
     }
-    
+
     long idArquivo;
     String nome;
     BufferedImage imagemBF;
     byte[] arquivoBytes;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,41 +105,46 @@ public class GUIInsertFile extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         //BOTAO CADASTRAR
         JFileChooser jFileChoose = new JFileChooser();
-        
+
         int resultado = jFileChoose.showOpenDialog(null);
-        
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
-            
+
             File arquivo = jFileChoose.getSelectedFile();
-            obj.setNome(arquivo.getName());
-            
-            try {
-                // FAZ UMA VALIDAÇÃO MAS NÃO É NECESSÁRIO
-                imagemBF = ManipularArquivo.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
-                
-                jLabelIconArquivo.setIcon(new ImageIcon(imagemBF));
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro", "Erro" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            if (arquivo.getName().contains(".png")) {
+
+                obj.setNome(arquivo.getName());
+
+                try {
+                    // FAZ UMA VALIDAÇÃO MAS NÃO É NECESSÁRIO
+                    imagemBF = ManipularArquivo.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
+
+                    jLabelIconArquivo.setIcon(new ImageIcon(imagemBF));
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro", "Erro" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Extensão do Arquivo é Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo.");
         }
+
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
         //BOTAO ENVIAR
         obj.setArquivoByte(ManipularArquivo.getImgBytes(imagemBF));
         try {
-            
+
             boolean foi = ArquivoDAO.inserindo(obj);
-            
+
             if (foi) {
                 JOptionPane.showMessageDialog(null, "Imagem enviada com sucesso");
                 jLabelIconArquivo.setIcon(null);

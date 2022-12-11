@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import persistence.ConexaoMysql;
@@ -18,7 +19,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, UnknownHostException {
         ConexaoMysql c = null;
         c.getConexao();
         new GUIInsertFile().setVisible(true);
